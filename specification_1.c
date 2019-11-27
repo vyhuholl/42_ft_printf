@@ -6,14 +6,19 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 15:10:30 by sghezn            #+#    #+#             */
-/*   Updated: 2019/11/02 15:56:46 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/11/27 13:16:04 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 /*
-** A function to parse parameter field.
+** Functions to parse format specification strings.
+*/
+
+
+/*
+** A function to parse the parameter field.
 */
 
 void	ft_parse_param(const char *format, t_fspec *spec, int *i)
@@ -47,7 +52,7 @@ void	ft_parse_flags(const char *format, t_fspec *spec, int *i)
 {
 	int index;
 
-	while ((*i < spec->len) && ((index = ft_strchr_index("-+ 0#", format[*i])) != -1))
+	while (*i < spec->len && (index = ft_strchr_index("-+ 0#", format[*i])) != -1)
 	{
 		spec->flags |= (1 << index);
 		(*i)++;
@@ -55,13 +60,15 @@ void	ft_parse_flags(const char *format, t_fspec *spec, int *i)
 }
 
 /*
-** A function to parse width field.
+** A function to parse the width field.
 */
 
 void	ft_parse_width(const char *format, t_fspec *spec, int *i)
 {
 	int	width;
 
+	if (!ft_isdigit(format[*i]))
+		spec->width = -1;
 	if (format[*i] == '*')
 	{
 		spec->width = INT_MAX;

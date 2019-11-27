@@ -6,14 +6,14 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:33:06 by sghezn            #+#    #+#             */
-/*   Updated: 2019/11/02 15:40:23 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/11/27 12:54:49 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 /*
-** A function to convert format placeholder string to a t_fspec structure.
+** A function to convert a format placeholder string to a t_fspec structure.
 */
 
 t_fspec	ft_to_spec(const char *format, int len)
@@ -44,7 +44,8 @@ t_fspec	ft_to_spec(const char *format, int len)
 
 
 /*
-** A function to print a format string and its arguments.
+** A function to print an argument formatted
+** accordingly to a specification.
 */
 
 int		ft_print_spec(t_fspec *spec, va_list ap)
@@ -54,12 +55,15 @@ int		ft_print_spec(t_fspec *spec, va_list ap)
 	if (spec->type == 'c')
 		return (ft_print_char(spec, ap));
 	if (spec->type == '%')
-		return (ft_print_percent(spec, ap));
-	return (ft_print_hex(spec, ap));
+	{
+		write(1, "%", 1);
+		return (1);
+	}
+	return (ft_print_number(spec, ap));
 }
 
 /*
-** A function to print both regular strings and format strings.
+** A function to print both regular strings and formatted strings.
 */
 
 int		ft_write(const char *format, int len, va_list ap)
@@ -74,7 +78,8 @@ int		ft_write(const char *format, int len, va_list ap)
 }
 
 /*
-** A function to read format string and arguments.
+** A function to read a format string and its arguments
+** and print the corresponding formatted string.
 */
 
 int		ft_read(const char *format, va_list ap)
@@ -91,9 +96,9 @@ int		ft_read(const char *format, va_list ap)
 		if (format[i] == '%')
 		{
 			i++;
-			while (format[i] && (ft_strchr_index("-+ 0#123456789$*.hlLjzt", format[i]) != -1))
+			while (format[i] && ft_strchr_index("-+ 0#123456789$*.hlLjzt", format[i]) != -1)
 				i++;
-			if (!format[i] || (ft_strchr_index("dDioOuUxXeEfFgGaAcCsSpn%", format[i]) == -1))
+			if (!format[i] || ft_strchr_index("dDioOuUxXeEfFgGaAcCsSpn%", format[i]) == -1)
 				continue;
 		}
 		else

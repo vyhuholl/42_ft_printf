@@ -6,14 +6,14 @@
 #    By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 12:25:19 by sghezn            #+#    #+#              #
-#    Updated: 2019/11/02 15:22:45 by sghezn           ###   ########.fr        #
+#    Updated: 2019/11/27 11:52:36 by sghezn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 FLAG = -Wall -Wextra -Werror
-SRC = ft_printf.c print.c specification_1.c specification_2.c
-OBJ = ft_printf.o print.o specification_1.o specification_2.o
+SRC = ft_printf.c numbers.c print.c specification_1.c specification_2.c
+OBJ = ft_printf.o numbers.o print.o specification_1.o specification_2.o
 
 all: $(NAME)
 

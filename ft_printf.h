@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:33:30 by sghezn            #+#    #+#             */
-/*   Updated: 2019/11/02 15:54:16 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/11/27 14:40:47 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@
 # include "libft/libft.h"
 # include <limits.h>
 # include <stdarg.h>
+# include <stddef.h>
+# include <stdint.h>
 # include <stdlib.h>
 # include <unistd.h>
 
 # define PRINTF_LENGTH_H 1
 # define PRINTF_LENGTH_L 2
-# define PRINTF_LENGTH_L_BIG 3
+# define PRINTF_LENGTH_L_DOUBLE 3
 # define PRINTF_LENGTH_Z 4
 # define PRINTF_LENGTH_J 5
 # define PRINTF_LENGTH_T 6
-# define PRINTF_LENGTH_LL 7
+# define PRINTF_LENGTH_HH 7
 # define PRINTF_LENGTH_LL 8
 
 /*
@@ -42,6 +44,7 @@
 typedef struct	s_fspec
 {
 	const char	*str;
+	int			num_val;
 	int			len;
 	int			param;
 	int			flags;
@@ -59,10 +62,14 @@ void			ft_parse_precision(const char *format, t_fspec *spec, int *i);
 void			ft_parse_length(const char *format, t_fspec *spec, int *i);
 void			ft_parse_type(const char *format, t_fspec *spec, int *i);
 t_fspec			ft_to_spec(const char *format, int len);
+intmax_t		ft_read_num_val(t_fspec *spec, va_list ap);
+char			*ft_get_prefix(t_fspec *spec);
+int				ft_itoa_printf_len(intmax_t n, t_fspec *spec);
+char			*ft_itoa_printf(intmax_t n, t_fspec *spec);
+char			*ft_itoa_oct_hex_printf(uintmax_t n, t_fspec *spec);
 int				ft_print_string(t_fspec *spec, va_list ap);
 int				ft_print_char(t_fspec *spec, va_list ap);
-int				ft_print_percent(t_fspec *spec, va_list ap);
-int				ft_print_hex(t_fspec *spec, va_list ap);
+int				ft_print_number(t_fspec *spec, va_list ap);
 int				ft_print_spec(t_fspec *spec, va_list ap);
 int				ft_write(const char *format, int len, va_list ap);
 int				ft_printf(const char *format, ...);
