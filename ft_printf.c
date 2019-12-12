@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:33:06 by sghezn            #+#    #+#             */
-/*   Updated: 2019/11/27 12:54:49 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/12 19:25:59 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,20 @@
 ** A function to convert a format placeholder string to a t_fspec structure.
 */
 
-t_fspec	ft_to_spec(const char *format, int len)
+t_fspec	ft_to_spec(const char *format)
 {
 	t_fspec	spec;
 	int		i;
 
-	spec = (t_spec)
-	{
-		.str = ft_strdup(format);
-		.len = len;
-		.param = 0;
-		.flags = 0;
-		.width = 0;
-		.precision = 0;
-		.length = 0;
-		.type = 0;
-	}
+	spec = (t_fspec) {
+		.str = ft_strdup(format),
+		.param = 0,
+		.flags = 0,
+		.width = 0,
+		.precision = 0,
+		.length = 0,
+		.type = 0
+	};
 	i = 0;
 	ft_parse_param(format, &spec, &i);
 	ft_parse_flags(format, &spec, &i);
@@ -41,7 +39,6 @@ t_fspec	ft_to_spec(const char *format, int len)
 	ft_parse_type(format, &spec, &i);
 	return (spec);
 }
-
 
 /*
 ** A function to print an argument formatted
@@ -68,8 +65,13 @@ int		ft_print_spec(t_fspec *spec, va_list ap)
 
 int		ft_write(const char *format, int len, va_list ap)
 {
+	t_fspec	spec;
+
 	if (*format == '%')
-		return (ft_print_spec(&ft_to_spec(format, len), ap));
+	{
+		spec = ft_to_spec(format);
+		return (ft_print_spec(&spec, ap));
+	}
 	else
 	{
 		write(1, format, len);
@@ -96,9 +98,11 @@ int		ft_read(const char *format, va_list ap)
 		if (format[i] == '%')
 		{
 			i++;
-			while (format[i] && ft_strchr_index("-+ 0#123456789$*.hlLjzt", format[i]) != -1)
+			while (format[i] && ft_strchr_index(
+				"-+ 0#123456789$*.hlLjzt", format[i]) != -1)
 				i++;
-			if (!format[i] || ft_strchr_index("dDioOuUxXeEfFgGaAcCsSpn%", format[i]) == -1)
+			if (!format[i] || ft_strchr_index(
+				"dDioOuUxXeEfFgGaAcCsSpn%", format[i]) == -1)
 				continue;
 		}
 		else
@@ -108,7 +112,6 @@ int		ft_read(const char *format, va_list ap)
 	}
 	return (res);
 }
-
 
 /*
 ** The main function.
