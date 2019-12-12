@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 14:19:25 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/12 18:52:22 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/12 18:57:59 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ void		ft_print_unsigned_int(t_fspec *spec)
 		return ;
 	while (len)
 	{
-		res[--len] = digits[n % base] - (spec->type == 'X' && n % base > 9 ? 32 : 0);
+		res[--len] = digits[n % base];
+		if (spec->type == 'X' && n % base > 9)
+			res[len] -= 32;
 		n /= base;
 	}
 	ft_putstr(res);

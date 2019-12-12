@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 15:21:03 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/11 15:58:36 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/12 19:00:35 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
 ** Functions to print formatted arguments.
 */
-
 
 /*
 ** A function to print a string formatted
