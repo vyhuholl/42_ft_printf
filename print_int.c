@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 14:19:25 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/12 20:02:51 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/12 21:09:34 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@ void		ft_print_signed_int(t_fspec *spec)
 	int			len;
 	intmax_t	n;
 
-	n = (spec->num_val < 0 ? -spec->num_val : spec->num_val);
+	n = *(intmax_t*)spec->num_val;
+	if (n < 0)
+		n *= -1;
 	len = 1;
 	while (n /= 10)
 		len++;
-	n = (spec->num_val < 0 ? -spec->num_val : spec->num_val);
+	n = *(intmax_t*)spec->num_val;
+	if (n < 0)
+		n *= -1;
 	if (!(res = ft_strnew(len)))
 		return ;
 	while (len)
@@ -50,12 +54,12 @@ void		ft_print_unsigned_int(t_fspec *spec)
 	int			len;
 	uintmax_t	n;
 
-	n = spec->num_val;
+	n = *(uintmax_t*)spec->num_val;
 	base = (spec->type == 'o' ? 8 : 16);
 	len = 1;
 	while (n /= base)
 		len++;
-	n = spec->num_val;
+	n = *(uintmax_t*)spec->num_val;
 	if (!(res = ft_strnew(len)))
 		return ;
 	while (len)

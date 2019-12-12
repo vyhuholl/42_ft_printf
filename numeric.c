@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 11:50:36 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/12 20:00:20 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/12 21:06:19 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int			ft_print_padding(t_fspec *spec, int prefix_len)
 	int			len;
 	char		c;
 
-	n = spec->num_val;
+	n = *(intmax_t*)spec->num_val;
 	if (n < 0)
 		n *= -1;
 	c = (spec->flags & 8 ? '0' : ' ');
