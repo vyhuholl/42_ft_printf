@@ -6,11 +6,11 @@
 #    By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 12:25:19 by sghezn            #+#    #+#              #
-#    Updated: 2019/12/12 18:29:18 by sghezn           ###   ########.fr        #
+#    Updated: 2019/12/12 21:13:09 by sghezn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_ls
+NAME = ft_printf
 FLAG = -Wall -Wextra -Werror
 SRC = ft_printf.c numeric.c print_int.c print.c specification_1.c specification_2.c
 OBJ = ft_printf.o numeric.o print_int.o print.o specification_1.o specification_2.o
