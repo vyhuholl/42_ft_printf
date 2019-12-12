@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 14:04:12 by sghezn            #+#    #+#             */
-/*   Updated: 2019/11/27 13:36:18 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/04 14:11:41 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	ft_parse_precision(const char *format, t_fspec *spec, int *i)
 	int precision;
 
 	if (format[*i] != '.')
-		spec->precision = INT_MAX;
+		spec->precision = 0;
 	if (format[++(*i)] == '*')
-		spec->precision = -1;
+		spec->precision = INT_MAX;
 	else
 	{
 		precision = 0;

@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 15:10:30 by sghezn            #+#    #+#             */
-/*   Updated: 2019/11/27 13:16:04 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/04 14:12:23 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ void	ft_parse_width(const char *format, t_fspec *spec, int *i)
 	int	width;
 
 	if (!ft_isdigit(format[*i]))
-		spec->width = -1;
+		spec->width = 0;
 	if (format[*i] == '*')
 	{
-		spec->width = INT_MAX;
+		spec->width = -1;
 		(*i)++;
 	}
 	else
