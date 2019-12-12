@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 15:21:03 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/12 19:00:35 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/12 20:05:38 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		ft_print_char(t_fspec *spec, va_list ap)
 		spec->width = va_arg(ap, int);
 	if (spec->precision == INT_MAX)
 		spec->precision = va_arg(ap, int);
-	c = va_arg(ap, char);
+	c = (char)va_arg(ap, int);
 	if (spec->width < 1)
 		spec->width = 1;
 	res = spec->width;
@@ -83,7 +83,6 @@ int		ft_print_char(t_fspec *spec, va_list ap)
 
 int		ft_print_number(t_fspec *spec, va_list ap)
 {
-	char		*prefix;
 	int			prefix_len;
 	int			res;
 
@@ -92,9 +91,12 @@ int		ft_print_number(t_fspec *spec, va_list ap)
 		spec->width = va_arg(ap, int);
 	if (spec->precision == INT_MAX)
 		spec->precision = va_arg(ap, int);
-	ft_read_num_val(spec, ap);
+	if (spec->type == 'd')
+		ft_read_int(spec, ap);
+	else
+		ft_read_uint(spec, ap);
 	prefix_len = ft_print_prefix(spec);
-	if (!spec->flags & 1)
+	if (!(spec->flags & 1))
 		res = ft_print_padding(spec, prefix_len);
 	if (spec->type == 'd')
 		ft_print_signed_int(spec);
