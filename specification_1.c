@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 15:10:30 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/12 19:00:18 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/12 20:09:30 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_parse_flags(const char *format, t_fspec *spec, int *i)
 {
 	int id;
 
-	while (*i < spec->len && (id = ft_strchr_index("-+ 0#", format[*i])) != -1)
+	while (format[*i] && (id = ft_strchr_index("-+ 0#", format[*i])) != -1)
 	{
 		spec->flags |= (1 << id);
 		(*i)++;

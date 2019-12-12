@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 14:04:12 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/12 19:02:15 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/12 20:14:21 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_parse_precision(const char *format, t_fspec *spec, int *i)
 		precision = 0;
 		while (ft_isdigit(format[*i]))
 		{
-			precision = precision * 10 + (format[*i] - '0')
+			precision = precision * 10 + (format[*i] - '0');
 			(*i)++;
 		}
 		spec->precision = precision;
@@ -46,7 +46,7 @@ void	ft_parse_precision(const char *format, t_fspec *spec, int *i)
 
 void	ft_parse_length(const char *format, t_fspec *spec, int *i)
 {
-	index	int;
+	int	index;
 
 	if ((index = ft_strchr_index("hlLzjt", format[*i])) == -1)
 		return ;
@@ -67,9 +67,7 @@ void	ft_parse_length(const char *format, t_fspec *spec, int *i)
 void	ft_parse_type(const char *format, t_fspec *spec, int *i)
 {
 	spec->type = format[*i];
-	if (spec->type == 'D' || spec->type == 'O' || spec->type == 'U' || spec->type == 'C' || spec->type == 'S')
-		spec->length = PRINTF_LENGTH_L;
-	if (spec->type == 'D')
+	if (ft_strchr_index("DOUCS", spec->type) != -1)
 		spec->length = PRINTF_LENGTH_L;
 	if (spec->type == 'i' || spec->type == 'D')
 		spec->type = 'd';
