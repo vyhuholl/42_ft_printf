@@ -6,7 +6,7 @@
 #    By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 12:25:19 by sghezn            #+#    #+#              #
-#    Updated: 2019/12/18 11:57:31 by sghezn           ###   ########.fr        #
+#    Updated: 2019/12/18 12:02:43 by sghezn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ all: $(NAME)
 
 $(NAME):
 	@make -C libft
+	@cp ./libft/libft.a $(NAME)
 	$(CC) $(CFLAGS) -c $(SRC) -I $(INC) -I $(LIB)
 	@ar rc $(NAME) $(OBJ)
 
