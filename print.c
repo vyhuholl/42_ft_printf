@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 15:21:03 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/12 22:25:57 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/18 13:08:26 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,32 @@
 /*
 ** Functions to print formatted arguments.
 */
+
+/*
+** A function to print a character formatted
+** accordingly to a specification.
+*/
+
+int		ft_print_char(t_fspec *spec, va_list ap)
+{
+	char	c;
+	int		res;
+
+	if (spec->width == -1)
+		spec->width = va_arg(ap, int);
+	if (spec->precision == INT_MAX)
+		spec->precision = va_arg(ap, int);
+	c = (char)va_arg(ap, int);
+	if (spec->width < 1)
+		spec->width = 1;
+	res = spec->width;
+	while (!(spec->flags & 1) && spec->width-- > 1)
+		write(1, " ", 1);
+	write(1, &c, 1);
+	while ((spec->flags & 1) && spec->width-- > 1)
+		write(1, " ", 1);
+	return (res);
+}
 
 /*
 ** A function to print a string formatted
@@ -51,26 +77,24 @@ int		ft_print_string(t_fspec *spec, va_list ap)
 }
 
 /*
-** A function to print a character formatted
+** A function to print a percent sign (%) formatted
 ** accordingly to a specification.
 */
 
-int		ft_print_char(t_fspec *spec, va_list ap)
+int		ft_print_percent(t_fspec *spec, va_list ap)
 {
-	char	c;
 	int		res;
 
 	if (spec->width == -1)
 		spec->width = va_arg(ap, int);
 	if (spec->precision == INT_MAX)
 		spec->precision = va_arg(ap, int);
-	c = (char)va_arg(ap, int);
 	if (spec->width < 1)
 		spec->width = 1;
 	res = spec->width;
 	while (!(spec->flags & 1) && spec->width-- > 1)
 		write(1, " ", 1);
-	write(1, &c, 1);
+	write(1, "%", 1);
 	while ((spec->flags & 1) && spec->width-- > 1)
 		write(1, " ", 1);
 	return (res);

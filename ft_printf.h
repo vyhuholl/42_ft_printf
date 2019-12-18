@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:33:30 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/18 12:53:23 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/18 13:05:59 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ int				ft_print_prefix(t_fspec *spec);
 int				ft_print_padding(t_fspec *spec, int prefix_len);
 void			ft_print_signed_int(t_fspec *spec);
 void			ft_print_unsigned_int(t_fspec *spec);
-int				ft_print_string(t_fspec *spec, va_list ap);
 int				ft_print_char(t_fspec *spec, va_list ap);
+int				ft_print_string(t_fspec *spec, va_list ap);
+int				ft_print_percent(t_fspec *spec, va_list ap);
 int				ft_print_number(t_fspec *spec, va_list ap);
 int				ft_write(const char *format, int len, va_list ap);
 int				ft_printf(const char *format, ...);

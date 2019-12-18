@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:33:06 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/18 12:53:12 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/18 13:04:43 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,12 @@ t_fspec	ft_to_spec(const char *format)
 
 int		ft_print_spec(t_fspec *spec, va_list ap)
 {
-	if (spec->type == 's')
-		return (ft_print_string(spec, ap));
 	if (spec->type == 'c')
 		return (ft_print_char(spec, ap));
+	if (spec->type == 's')
+		return (ft_print_string(spec, ap));
 	if (spec->type == '%')
-	{
-		write(1, "%", 1);
-		return (1);
-	}
+		return (ft_print_percent(spec, ap));
 	return (ft_print_number(spec, ap));
 }
 
