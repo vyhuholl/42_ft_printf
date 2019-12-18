@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:33:06 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/18 13:04:43 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/18 14:09:38 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int		ft_read(const char *format, va_list ap)
 }
 
 /*
-** The main function.
+** The main ft_printf function.
 */
 
 int		ft_printf(const char *format, ...)

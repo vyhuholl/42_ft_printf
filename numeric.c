@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 11:50:36 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/12 22:25:57 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/18 14:50:36 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 */
 
 /*
-** A function which reads a signed decimal integer
+** A function to read a signed decimal integer
 ** of the expected size and type from CLI arguments.
 */
 
@@ -48,7 +48,7 @@ void		ft_read_int(t_fspec *spec, va_list ap)
 }
 
 /*
-** A function which reads an unsigned integer
+** A function to read an unsigned integer
 ** of the expected size and type from CLI arguments.
 */
 
@@ -78,7 +78,7 @@ void		ft_read_uint(t_fspec *spec, va_list ap)
 }
 
 /*
-** A function which prints a prefix prepended to a number.
+** A function to print the prefix to a number.
 */
 
 int			ft_print_prefix(t_fspec *spec)
@@ -97,21 +97,20 @@ int			ft_print_prefix(t_fspec *spec)
 		if (spec->num_val > 0 || spec->flags & 2 || spec->flags & 4)
 			return (1);
 	}
-	if (spec->flags & 16 && ft_strchr_index("oxX", spec->type) != -1)
+	if (spec->flags & 16 && ft_strchr_index("oxX", spec->type) != -1
+		&& spec->num_val != 0)
 	{
 		write(1, "0", 1);
-		if (spec->type == 'x' || spec->type == 'X')
-		{
-			write(1, &spec->type, 1);
-			return (2);
-		}
-		return (1);
+		if (spec->type == 'o')
+			return (1);
+		write(1, &spec->type, 1);
+		return (2);
 	}
 	return (0);
 }
 
 /*
-** Utility function to print a character c n times.
+** An auxillary function to print a character repeated n times.
 */
 
 void		ft_write_repeat(char c, int n)
@@ -124,22 +123,16 @@ void		ft_write_repeat(char c, int n)
 }
 
 /*
-** A function which prints zeros/spaces used to pad a number.
+** A function to pad a number with zeroes or spaces.
 */
 
 int			ft_print_padding(t_fspec *spec, int prefix_len)
 {
-	intmax_t	n;
-	int			len;
 	char		c;
+	int			len;
 
-	n = *(intmax_t*)spec->num_val;
-	if (n < 0)
-		n *= -1;
 	c = (spec->flags & 8 ? '0' : ' ');
-	len = 1;
-	while (n /= 10)
-		len++;
+	len = ft_nbrlen(spec);
 	if (spec->width > len && spec->width > spec->precision + prefix_len)
 	{
 		if (spec->precision + prefix_len > len)

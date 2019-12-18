@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:33:30 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/18 13:18:55 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/18 14:17:10 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define PRINTF_LENGTH_LL 8
 
 /*
-** Format specification.
+** Format specification structure.
 ** All flags are stored in a single integer,
 ** where n-th bit is n-th flag.
 ** 1:-(minus) - left-align the output;
@@ -67,6 +67,7 @@ void			ft_read_int(t_fspec *spec, va_list ap);
 void			ft_read_uint(t_fspec *spec, va_list ap);
 void			ft_write_repeat(char c, int n);
 int				ft_print_prefix(t_fspec *spec);
+int				ft_nbrlen(t_fspec *spec);
 int				ft_print_padding(t_fspec *spec, int prefix_len);
 void			ft_print_signed_int(t_fspec *spec);
 void			ft_print_unsigned_int(t_fspec *spec);
