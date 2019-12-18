@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 15:10:30 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/12 22:25:57 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/18 12:50:02 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_parse_param(const char *format, t_fspec *spec, int *i)
 	int	param;
 	int	temp;
 
-	if (!ft_isdigit(format[++(*i)]))
+	if (!ft_isdigit(format[*i]))
 		return ;
 	param = 0;
 	temp = *i;

@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:33:06 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/12 22:25:57 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/18 12:53:12 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_fspec	ft_to_spec(const char *format)
 		.length = 0,
 		.type = 0
 	};
-	i = 0;
+	i = 1;
 	ft_parse_param(format, &spec, &i);
 	ft_parse_flags(format, &spec, &i);
 	ft_parse_width(format, &spec, &i);

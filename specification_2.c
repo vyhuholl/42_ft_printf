@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 14:04:12 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/12 22:25:57 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/18 12:52:15 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_parse_precision(const char *format, t_fspec *spec, int *i)
 	int precision;
 
 	if (format[*i] != '.')
-		spec->precision = 0;
+		return ;
 	if (format[++(*i)] == '*')
 		spec->precision = INT_MAX;
 	else
@@ -50,7 +50,6 @@ void	ft_parse_length(const char *format, t_fspec *spec, int *i)
 
 	if ((index = ft_strchr_index("hlLzjt", format[*i])) == -1)
 		return ;
-	(*i)++;
 	if ((index == 0 || index == 1) && format[*i] == format[(*i) - 1])
 	{
 		spec->length = index + 7;
@@ -58,6 +57,7 @@ void	ft_parse_length(const char *format, t_fspec *spec, int *i)
 	}
 	else
 		spec->length = index + 1;
+	(*i)++;
 }
 
 /*
@@ -79,5 +79,4 @@ void	ft_parse_type(const char *format, t_fspec *spec, int *i)
 		spec->type = 'c';
 	if (spec->type == 'S')
 		spec->type = 's';
-	(*i)++;
 }
