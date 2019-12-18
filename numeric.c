@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 11:50:36 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/18 14:50:36 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/18 15:35:07 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,24 @@
 
 void		ft_read_int(t_fspec *spec, va_list ap)
 {
-	intmax_t	n;
-
 	if (spec->length == PRINTF_LENGTH_HH)
-		n = (char)va_arg(ap, int);
+		spec->value = (char)va_arg(ap, int);
 	else if (spec->length == PRINTF_LENGTH_H)
-		n = (short)va_arg(ap, int);
+		spec->value = (short)va_arg(ap, int);
 	else if (spec->length == PRINTF_LENGTH_L)
-		n = va_arg(ap, long);
+		spec->value = va_arg(ap, long);
 	else if (spec->length == PRINTF_LENGTH_LL)
-		n = va_arg(ap, long long);
+		spec->value = va_arg(ap, long long);
 	else if (spec->length == PRINTF_LENGTH_L_DOUBLE)
-		n = va_arg(ap, long double);
+		spec->value = va_arg(ap, long double);
 	else if (spec->length == PRINTF_LENGTH_Z)
-		n = va_arg(ap, ssize_t);
+		spec->value = va_arg(ap, ssize_t);
 	else if (spec->length == PRINTF_LENGTH_J)
-		n = va_arg(ap, intmax_t);
+		spec->value = va_arg(ap, intmax_t);
 	else if (spec->length == PRINTF_LENGTH_T)
-		n = va_arg(ap, ptrdiff_t);
+		spec->value = va_arg(ap, ptrdiff_t);
 	else
-		n = va_arg(ap, int);
-	spec->num_val = &n;
+		spec->value = va_arg(ap, int);
 }
 
 /*
@@ -54,27 +51,24 @@ void		ft_read_int(t_fspec *spec, va_list ap)
 
 void		ft_read_uint(t_fspec *spec, va_list ap)
 {
-	uintmax_t	n;
-
 	if (spec->length == PRINTF_LENGTH_HH)
-		n = (unsigned char)va_arg(ap, unsigned int);
+		spec->unsigned_value = (unsigned char)va_arg(ap, unsigned int);
 	else if (spec->length == PRINTF_LENGTH_H)
-		n = (unsigned short)va_arg(ap, unsigned int);
+		spec->unsigned_value = (unsigned short)va_arg(ap, unsigned int);
 	else if (spec->length == PRINTF_LENGTH_L)
-		n = va_arg(ap, unsigned long);
+		spec->unsigned_value = va_arg(ap, unsigned long);
 	else if (spec->length == PRINTF_LENGTH_LL)
-		n = va_arg(ap, unsigned long long);
+		spec->unsigned_value = va_arg(ap, unsigned long long);
 	else if (spec->length == PRINTF_LENGTH_L_DOUBLE)
-		n = va_arg(ap, long double);
+		spec->unsigned_value = va_arg(ap, long double);
 	else if (spec->length == PRINTF_LENGTH_Z)
-		n = va_arg(ap, ssize_t);
+		spec->unsigned_value = va_arg(ap, ssize_t);
 	else if (spec->length == PRINTF_LENGTH_J)
-		n = va_arg(ap, uintmax_t);
+		spec->unsigned_value = va_arg(ap, uintmax_t);
 	else if (spec->length == PRINTF_LENGTH_T)
-		n = va_arg(ap, ptrdiff_t);
+		spec->unsigned_value = va_arg(ap, ptrdiff_t);
 	else
-		n = va_arg(ap, unsigned int);
-	spec->num_val = &n;
+		spec->unsigned_value = va_arg(ap, unsigned int);
 }
 
 /*
@@ -83,22 +77,17 @@ void		ft_read_uint(t_fspec *spec, va_list ap)
 
 int			ft_print_prefix(t_fspec *spec)
 {
-	if (spec->type == 'd')
+	if (spec->type == 'd' && spec->value != 0)
 	{
-		if (spec->num_val > 0)
-		{
-			if (spec->flags & 2)
-				write(1, "+", 1);
-			if (spec->flags & 4)
-				write(1, " ", 1);
-		}
-		else if (spec->num_val < 0)
+		if (spec->value < 0)
 			write(1, "-", 1);
-		if (spec->num_val > 0 || spec->flags & 2 || spec->flags & 4)
-			return (1);
+		else if (spec->flags & 2 && spec->value > 0)
+			write(1, "+", 1);
+		else if (spec->flags & 4 && spec->value > 0)
+			write(1, " ", 1);
+		return (1);
 	}
-	if (spec->flags & 16 && ft_strchr_index("oxX", spec->type) != -1
-		&& spec->num_val != 0)
+	if (spec->type != 'd' && spec->flags & 16 && spec->unsigned_value != 0)
 	{
 		write(1, "0", 1);
 		if (spec->type == 'o')

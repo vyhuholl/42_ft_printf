@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 14:19:25 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/18 14:59:13 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/18 15:35:22 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,18 @@ int			ft_nbrlen(t_fspec *spec)
 	intmax_t	n_int;
 	uintmax_t	n_uint;
 
+	n_int = (spec->value < 0 ? -spec->value : spec->value);
+	n_uint = spec->unsigned_value;
 	len = 1;
-	n_int = 0;
-	n_uint = 0;
+	base = 10;
+	if (spec->type != 'd')
+		base = (spec->type == 'o' ? 8 : 16);
 	if (spec->type == 'd')
-	{
-		ft_memcpy(&*(intmax_t*)spec->num_val, &n_int, sizeof(spec->num_val));
-		n_int = (n_int < 0 ? -n_int : n_int);
 		while (n_int /= 10)
 			len++;
-	}
 	else
-	{
-		base = (spec->type == 'o' ? 8 : 16);
-		ft_memcpy(&*(uintmax_t*)spec->num_val, &n_uint, sizeof(spec->num_val));
 		while (n_uint /= base)
 			len++;
-	}
 	return (len);
 }
 
@@ -54,9 +49,7 @@ void		ft_print_signed_int(t_fspec *spec)
 	int			len;
 	intmax_t	n;
 
-	n = 0;
-	ft_memcpy(&*(intmax_t*)spec->num_val, &n, sizeof(spec->num_val));
-	n = (n < 0 ? -n : n);
+	n = (spec->value < 0 ? -spec->value : spec->value);
 	len = ft_nbrlen(spec);
 	if (!(res = ft_strnew(len)))
 		return ;
@@ -81,8 +74,7 @@ void		ft_print_unsigned_int(t_fspec *spec)
 	int			len;
 	uintmax_t	n;
 
-	n = 0;
-	ft_memcpy(&*(uintmax_t*)spec->num_val, &n, sizeof(spec->num_val));
+	n = spec->unsigned_value;
 	len = ft_nbrlen(spec);
 	base = (spec->type == 'o' ? 8 : 16);
 	if (!(res = ft_strnew(len)))

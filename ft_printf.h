@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:33:30 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/18 14:17:10 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/18 15:10:07 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@
 typedef struct	s_fspec
 {
 	const char	*str;
-	void		*num_val;
+	intmax_t	value;
+	uintmax_t	unsigned_value;
 	int			param;
 	int			flags;
 	int			width;
