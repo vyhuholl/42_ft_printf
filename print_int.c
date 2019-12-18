@@ -6,14 +6,14 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 14:19:25 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/18 15:35:22 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/18 15:59:32 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 /*
-** An auxillary function to compute the length of an integer
+** An auxiliary function to compute the length of an integer
 ** (unsigned octal, unsigned hexadecimal or signed decimal).
 */
 

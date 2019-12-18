@@ -6,15 +6,14 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 11:50:36 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/18 15:35:07 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/18 15:59:32 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 /*
-** Auxillary functions used for printing
-** formatted numeric types.
+** Auxiliary functions for printing formatted numeric types.
 */
 
 /*
@@ -99,7 +98,7 @@ int			ft_print_prefix(t_fspec *spec)
 }
 
 /*
-** An auxillary function to print a character repeated n times.
+** An auxiliary function to print a character repeated n times.
 */
 
 void		ft_write_repeat(char c, int n)
