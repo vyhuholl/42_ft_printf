@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 11:50:36 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/18 15:59:32 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/30 02:31:22 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,11 @@ int			ft_print_prefix(t_fspec *spec)
 		write(1, "0", 1);
 		if (spec->type == 'o')
 			return (1);
-		write(1, &spec->type, 1);
-		return (2);
+		else
+		{
+			write(1, &spec->type, 1);
+			return (2);
+		}
 	}
 	return (0);
 }

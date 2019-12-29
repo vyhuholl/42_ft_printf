@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:33:06 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/18 14:09:38 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/30 02:55:25 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,9 @@ int		ft_read(const char *format, va_list ap)
 		{
 			i++;
 			while (format[i] && ft_strchr_index(
-				"-+ 0#123456789$*.hlLjzt", format[i]) != -1)
-				i++;
-			if (!format[i] || ft_strchr_index(
 				"dDioOuUxXeEfFgGaAcCsSpn%", format[i]) == -1)
-				continue;
+				i++;
+			i++;
 		}
 		else
 			while (format[i] && format[i] != '%')

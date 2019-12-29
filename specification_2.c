@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 14:04:12 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/18 12:52:15 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/30 02:43:50 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,5 @@ void	ft_parse_type(const char *format, t_fspec *spec, int *i)
 		spec->type = 'c';
 	if (spec->type == 'S')
 		spec->type = 's';
+	(*i)++;
 }
