@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 15:21:03 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/30 05:05:20 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/30 19:11:03 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,7 @@ int	ft_print_string(t_fspec *spec, va_list ap)
 	if (!str)
 		str = "(null)";
 	len = ft_strlen(str);
-	if (spec->precision > len)
-		spec->precision = len;
-	else
+	if (spec->precision != -1 && spec->precision < len)
 		len = spec->precision;
 	if (spec->width < len)
 		spec->width = len;
@@ -84,7 +82,9 @@ int	ft_print_string(t_fspec *spec, va_list ap)
 int	ft_print_percent(t_fspec *spec, va_list ap)
 {
 	int		res;
+	char	c;
 
+	c = ((!(spec->flags & 1) && spec->flags & 8) ? '0' : ' ');
 	if (spec->width == -1)
 		spec->width = va_arg(ap, int);
 	if (spec->precision == INT_MAX)
@@ -93,10 +93,10 @@ int	ft_print_percent(t_fspec *spec, va_list ap)
 		spec->width = 1;
 	res = spec->width;
 	while (!(spec->flags & 1) && spec->width-- > 1)
-		write(1, " ", 1);
+		write(1, &c, 1);
 	write(1, "%", 1);
 	while ((spec->flags & 1) && spec->width-- > 1)
-		write(1, " ", 1);
+		write(1, &c, 1);
 	return (res);
 }
 
@@ -119,9 +119,10 @@ int	ft_print_number(t_fspec *spec, va_list ap)
 	else
 		ft_read_uint(spec, ap);
 	len = ft_number_full_len(spec);
-	res = (spec->width > len ? len + spec->width : len);
+	res = (spec->width > len ? spec->width : len);
 	while (!(spec->flags & 1) && spec->width-- > len)
 		write(1, " ", 1);
+	ft_print_prefix(spec, len);
 	if (spec->type == 'd')
 		ft_print_signed_int(spec);
 	else

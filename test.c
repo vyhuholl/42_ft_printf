@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 12:10:18 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/30 05:54:21 by sghezn           ###   ########.fr       */
+/*   Created: 2019/12/30 17:43:43 by sghezn            #+#    #+#             */
+/*   Updated: 2019/12/30 19:27:14 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "ft_printf.h"
 
-int	main(void)
+int main(void)
 {
-	printf("%010.5d\n", 2);
+	ft_printf("this %i number", 17);
 }

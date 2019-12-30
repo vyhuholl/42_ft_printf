@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 14:04:12 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/30 04:18:51 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/30 09:39:22 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_parse_length(const char *format, t_fspec *spec, int *i)
 
 	if ((index = ft_strchr_index("hlLzjt", format[*i])) == -1)
 		return ;
-	if ((index == 0 || index == 1) && format[*i] == format[(*i) - 1])
+	if ((index == 0 || index == 1) && format[*i] == format[(*i) + 1])
 	{
 		spec->length = index + 7;
 		(*i)++;

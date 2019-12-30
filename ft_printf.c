@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:33:06 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/30 02:55:25 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/30 16:47:53 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_fspec	ft_to_spec(const char *format)
 		.param = 0,
 		.flags = 0,
 		.width = 0,
-		.precision = 0,
+		.precision = -1,
 		.length = 0,
 		.type = 0
 	};
@@ -60,11 +60,11 @@ int		ft_print_spec(t_fspec *spec, va_list ap)
 ** A function to print both regular strings and formatted strings.
 */
 
-int		ft_write(const char *format, int len, va_list ap)
+int		ft_write(const char *format, int len, int is_ok, va_list ap)
 {
 	t_fspec	spec;
 
-	if (*format == '%')
+	if (*format == '%' && is_ok)
 	{
 		spec = ft_to_spec(format);
 		return (ft_print_spec(&spec, ap));
@@ -83,8 +83,9 @@ int		ft_write(const char *format, int len, va_list ap)
 
 int		ft_read(const char *format, va_list ap)
 {
-	int	res;
 	int	start;
+	int	is_ok;
+	int	res;
 	int	i;
 
 	res = 0;
@@ -92,18 +93,17 @@ int		ft_read(const char *format, va_list ap)
 	while (format[i])
 	{
 		start = i;
+		is_ok = 0;
 		if (format[i] == '%')
 		{
 			i++;
-			while (format[i] && ft_strchr_index(
-				"dDioOuUxXeEfFgGaAcCsSpn%", format[i]) == -1)
-				i++;
-			i++;
+			if (ft_parse(format, &i, &is_ok))
+				continue;
 		}
 		else
 			while (format[i] && format[i] != '%')
 				i++;
-		res += ft_write(format + start, i - start, ap);
+		res += ft_write(format + start, i - start, is_ok, ap);
 	}
 	return (res);
 }

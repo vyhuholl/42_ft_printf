@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:33:30 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/30 05:46:59 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/30 16:54:15 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct	s_fspec
 	char		type;
 }				t_fspec;
 
+int				ft_is_ok(char c);
+int				ft_parse(const char *format, int *i, int *is_ok);
 int				ft_read(const char *format, va_list ap);
 void			ft_parse_param(const char *format, t_fspec *spec, int *i);
 void			ft_parse_flags(const char *format, t_fspec *spec, int *i);
@@ -69,14 +71,14 @@ void			ft_read_uint(t_fspec *spec, va_list ap);
 int				ft_number_len(t_fspec *spec);
 int				ft_number_prefix_len(t_fspec *spec);
 int				ft_number_full_len(t_fspec *spec);
-char			*ft_set_prefix(t_fspec *spec);
+void			ft_print_prefix(t_fspec *spec, int len);
 void			ft_print_signed_int(t_fspec *spec);
 void			ft_print_unsigned_int(t_fspec *spec);
 int				ft_print_char(t_fspec *spec, va_list ap);
 int				ft_print_string(t_fspec *spec, va_list ap);
 int				ft_print_percent(t_fspec *spec, va_list ap);
 int				ft_print_number(t_fspec *spec, va_list ap);
-int				ft_write(const char *format, int len, va_list ap);
+int				ft_write(const char *format, int len, int is_ok, va_list ap);
 int				ft_printf(const char *format, ...);
 
 #endif

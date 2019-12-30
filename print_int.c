@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 11:50:36 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/30 06:03:27 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/30 19:38:10 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,40 @@ void	ft_read_uint(t_fspec *spec, va_list ap)
 }
 
 /*
+** A function to print a prefix to an integer number.
+*/
+
+void	ft_print_prefix(t_fspec *spec, int len)
+{
+	int	count;
+
+	printf("%lu\n", spec->unsigned_value);
+	if (spec->type == 'd')
+	{
+		if (spec->value < 0)
+			write(1, "-", 1);
+		else if (spec->flags & 2)
+			write(1, "+", 1);
+		else if (spec->flags & 4)
+			write(1, " ", 1);
+	}
+	if (spec->flags & 16 && spec->unsigned_value != 0)
+	{
+		if (spec->type == 'o' || spec->type == 'x' || spec->type == 'X')
+		{
+			write(1, "0", 1);
+			if (spec->type != 'o')
+				write(1, &spec->type, 1);
+		}
+	}
+	if (spec->type == 'p')
+		write(1, "0x", 2);
+	count = len - ft_number_len(spec) - ft_number_prefix_len(spec);
+	while (count--)
+		write(1, "0", 1);
+}
+
+/*
 ** A function to print a signed decimal integer.
 */
 
@@ -82,7 +116,8 @@ void	ft_print_signed_int(t_fspec *spec)
 
 	n = (spec->value < 0 ? -spec->value : spec->value);
 	len = ft_number_len(spec);
-	res = ft_set_prefix(spec);
+	if (!len || !(res = ft_strnew(len)))
+		return ;
 	while (len)
 	{
 		res[--len] = n % 10 + 48;
@@ -106,10 +141,11 @@ void	ft_print_unsigned_int(t_fspec *spec)
 
 	n = spec->unsigned_value;
 	len = ft_number_len(spec);
-	res = ft_set_prefix(spec);
-	base = (spec->type == 'o' ? 8 : 16);
-	if (spec->type == 'u')
-		base = 10;
+	if (!len || !(res = ft_strnew(len)))
+		return ;
+	base = 10;
+	if (spec->type != 'd' && spec->type != 'u')
+		base = (spec->type == 'o' ? 8 : 16);
 	while (len)
 	{
 		res[--len] = digits[n % base];
