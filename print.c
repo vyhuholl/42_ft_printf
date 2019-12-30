@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 15:21:03 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/18 15:49:21 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/30 05:05:20 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ** accordingly to a specification.
 */
 
-int		ft_print_char(t_fspec *spec, va_list ap)
+int	ft_print_char(t_fspec *spec, va_list ap)
 {
 	char	c;
 	int		res;
@@ -47,7 +47,7 @@ int		ft_print_char(t_fspec *spec, va_list ap)
 ** accordingly to a specification.
 */
 
-int		ft_print_string(t_fspec *spec, va_list ap)
+int	ft_print_string(t_fspec *spec, va_list ap)
 {
 	char	*str;
 	int		len;
@@ -81,7 +81,7 @@ int		ft_print_string(t_fspec *spec, va_list ap)
 ** accordingly to a specification.
 */
 
-int		ft_print_percent(t_fspec *spec, va_list ap)
+int	ft_print_percent(t_fspec *spec, va_list ap)
 {
 	int		res;
 
@@ -105,12 +105,11 @@ int		ft_print_percent(t_fspec *spec, va_list ap)
 ** formatted accordingly to a specification.
 */
 
-int		ft_print_number(t_fspec *spec, va_list ap)
+int	ft_print_number(t_fspec *spec, va_list ap)
 {
-	int			prefix_len;
+	int			len;
 	int			res;
 
-	res = 0;
 	if (spec->width == -1)
 		spec->width = va_arg(ap, int);
 	if (spec->precision == INT_MAX)
@@ -119,14 +118,15 @@ int		ft_print_number(t_fspec *spec, va_list ap)
 		ft_read_int(spec, ap);
 	else
 		ft_read_uint(spec, ap);
-	prefix_len = ft_print_prefix(spec);
-	if (!(spec->flags & 1))
-		res = ft_print_padding(spec, prefix_len);
+	len = ft_number_full_len(spec);
+	res = (spec->width > len ? len + spec->width : len);
+	while (!(spec->flags & 1) && spec->width-- > len)
+		write(1, " ", 1);
 	if (spec->type == 'd')
 		ft_print_signed_int(spec);
 	else
 		ft_print_unsigned_int(spec);
-	if (spec->flags & 1)
-		res = ft_print_padding(spec, prefix_len);
+	while ((spec->flags & 1) && spec->width-- > len)
+		write(1, " ", 1);
 	return (res);
 }

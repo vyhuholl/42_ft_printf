@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 12:33:30 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/18 15:10:07 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/30 05:46:59 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ t_fspec			ft_to_spec(const char *format);
 int				ft_print_spec(t_fspec *spec, va_list ap);
 void			ft_read_int(t_fspec *spec, va_list ap);
 void			ft_read_uint(t_fspec *spec, va_list ap);
-void			ft_write_repeat(char c, int n);
-int				ft_print_prefix(t_fspec *spec);
-int				ft_nbrlen(t_fspec *spec);
-int				ft_print_padding(t_fspec *spec, int prefix_len);
+int				ft_number_len(t_fspec *spec);
+int				ft_number_prefix_len(t_fspec *spec);
+int				ft_number_full_len(t_fspec *spec);
+char			*ft_set_prefix(t_fspec *spec);
 void			ft_print_signed_int(t_fspec *spec);
 void			ft_print_unsigned_int(t_fspec *spec);
 int				ft_print_char(t_fspec *spec, va_list ap);

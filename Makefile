@@ -6,7 +6,7 @@
 #    By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 12:25:19 by sghezn            #+#    #+#              #
-#    Updated: 2019/12/18 12:02:43 by sghezn           ###   ########.fr        #
+#    Updated: 2019/12/30 04:04:49 by sghezn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME := libftprintf.a
 
-SRC := ft_printf.c numeric.c print_int.c print.c specification_1.c specification_2.c
+SRC := ft_printf.c num_utils.c print_int.c print.c specification_1.c specification_2.c
 OBJ := $(SRC:%.c=%.o)
 
 INC := ft_printf.h

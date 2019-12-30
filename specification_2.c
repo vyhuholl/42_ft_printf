@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 14:04:12 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/30 02:43:50 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/30 04:18:51 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	ft_parse_type(const char *format, t_fspec *spec, int *i)
 	spec->type = format[*i];
 	if (ft_strchr_index("DOUCS", spec->type) != -1)
 		spec->length = PRINTF_LENGTH_L;
+	if (spec->type == 'p')
+		spec->length = PRINTF_LENGTH_LL;
 	if (spec->type == 'i' || spec->type == 'D')
 		spec->type = 'd';
 	if (spec->type == 'O')

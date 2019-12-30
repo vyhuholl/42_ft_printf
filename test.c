@@ -6,20 +6,13 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 12:10:18 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/30 02:19:54 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/30 05:54:21 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdio.h>
 
 int	main(void)
 {
-	ft_printf("%d", 42);
-	write(1, "\n", 1);
-	ft_printf("%D", 42);
-	write(1, "\n", 1);
-	ft_printf("%x", 42);
-	write(1, "\n", 1);
-	ft_printf("%X", 42);
-	write(1, "\n", 1);
+	printf("%010.5d\n", 2);
 }
