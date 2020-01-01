@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 14:19:25 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/30 17:49:22 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/31 19:43:40 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int		ft_parse(const char *format, int *i, int *is_ok)
 	static char	*chars = "dDioOuUxXeEfFgGaAcCsSpn%";
 
 	while (format[*i] && ft_is_ok(format[*i]) &&
-		   ft_strchr_index(chars, format[*i]) == -1)
-			(*i)++;
+			ft_strchr_index(chars, format[*i]) == -1)
+		(*i)++;
 	if (ft_is_ok(format[*i]))
 	{
 		*is_ok = 1;

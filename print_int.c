@@ -6,7 +6,7 @@
 /*   By: sghezn <sghezn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 11:50:36 by sghezn            #+#    #+#             */
-/*   Updated: 2019/12/30 19:38:10 by sghezn           ###   ########.fr       */
+/*   Updated: 2019/12/31 19:40:22 by sghezn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	ft_print_prefix(t_fspec *spec, int len)
 {
 	int	count;
 
-	printf("%lu\n", spec->unsigned_value);
 	if (spec->type == 'd')
 	{
 		if (spec->value < 0)
